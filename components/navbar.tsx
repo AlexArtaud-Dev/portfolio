@@ -7,7 +7,7 @@ import { LanguageToggle } from "./language-toggle";
 import { useLanguage, pick } from "@/lib/i18n";
 import { dict } from "@/lib/dictionary";
 
-const linkIds = ["about", "projects", "experience", "skills", "homelab", "contact"] as const;
+const linkIds = ["about", "projects", "architecture", "experience", "skills", "homelab", "contact"] as const;
 
 export function Navbar() {
   const { lang } = useLanguage();

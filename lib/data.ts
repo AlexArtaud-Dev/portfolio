@@ -1,5 +1,87 @@
 import type { Bi } from "./i18n";
 
+export type ArchitectureIcon = "layers" | "activity" | "shield";
+
+export type ArchitecturePillar = {
+  icon: ArchitectureIcon;
+  title: Bi;
+  description: Bi;
+  points: Bi[];
+};
+
+export const architecture: ArchitecturePillar[] = [
+  {
+    icon: "layers",
+    title: { fr: "Clean Architecture & DDD", en: "Clean Architecture & DDD" },
+    description: {
+      fr: "Séparation stricte entre domaine métier et infrastructure, pour du code testable et indépendant des frameworks.",
+      en: "Strict separation between business domain and infrastructure, for code that's testable and framework-independent.",
+    },
+    points: [
+      {
+        fr: "Velar (Go) : couches handlers/services/repositories découplées de la persistance GORM",
+        en: "Velar (Go): handlers/services/repositories layers decoupled from GORM persistence",
+      },
+      {
+        fr: "Orbix (NestJS) : modules métier isolés (backups, vault, scheduler) via injection de dépendances",
+        en: "Orbix (NestJS): isolated business modules (backups, vault, scheduler) via dependency injection",
+      },
+      {
+        fr: "Refonte Laravel chez Computacenter : extraction de la logique métier des contrôleurs vers des services dédiés",
+        en: "Laravel rebuild at Computacenter: business logic extracted from controllers into dedicated services",
+      },
+    ],
+  },
+  {
+    icon: "activity",
+    title: { fr: "API Design & Observabilité", en: "API Design & Observability" },
+    description: {
+      fr: "Des APIs typées de bout en bout et des services que je peux réellement surveiller en production.",
+      en: "End-to-end typed APIs and services I can actually monitor in production.",
+    },
+    points: [
+      {
+        fr: "API typées de bout en bout avec tRPC (plateforme HDM Network)",
+        en: "End-to-end typed APIs with tRPC (HDM Network platform)",
+      },
+      {
+        fr: "Hub développeur Velar : testeur d'API avec proxy serveur, tokens jamais exposés au navigateur",
+        en: "Velar developer hub: API tester with a server-side proxy, tokens never exposed to the browser",
+      },
+      {
+        fr: "Endpoint Prometheus et intégration Grafana sur Velar, Uptime Kuma pour le monitoring temps réel du homelab",
+        en: "Prometheus endpoint and Grafana integration on Velar, Uptime Kuma for real-time homelab monitoring",
+      },
+    ],
+  },
+  {
+    icon: "shield",
+    title: { fr: "Sécurité applicative", en: "Application Security" },
+    description: {
+      fr: "L'authentification et le chiffrement ne sont pas des options ajoutées après coup.",
+      en: "Authentication and encryption aren't an afterthought.",
+    },
+    points: [
+      {
+        fr: "Authentification JWT + refresh token httpOnly, TOTP et hachage bcrypt sur Velar",
+        en: "JWT + httpOnly refresh token authentication, TOTP and bcrypt hashing on Velar",
+      },
+      {
+        fr: "Vault de credentials chiffré en AES-256-GCM sur Orbix",
+        en: "AES-256-GCM encrypted credentials vault on Orbix",
+      },
+      {
+        fr: "Authentification centralisée LDAP + Authelia sur le homelab",
+        en: "Centralized LDAP + Authelia authentication on the homelab",
+      },
+      {
+        fr: "Durcissement et sécurisation d'une application Laravel critique chez Computacenter",
+        en: "Hardening and securing a critical Laravel application at Computacenter",
+      },
+    ],
+  },
+];
+
 export type ProjectIcon = "shield" | "archive" | "scanface" | "globe" | "clapperboard" | "filecheck";
 
 export type Project = {

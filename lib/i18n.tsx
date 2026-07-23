@@ -1,6 +1,7 @@
 "use client";
 
 import { createContext, useContext, useEffect, useState, type ReactNode } from "react";
+import { dict } from "./dictionary";
 
 export type Lang = "fr" | "en";
 
@@ -21,6 +22,11 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
       setLang(stored);
     }
   }, []);
+
+  useEffect(() => {
+    document.title = dict.meta.title[lang];
+    document.documentElement.lang = lang;
+  }, [lang]);
 
   const toggle = () => {
     setLang((prev) => {

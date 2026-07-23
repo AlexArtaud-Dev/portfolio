@@ -1,7 +1,14 @@
 export const dict = {
+  meta: {
+    title: {
+      fr: "Alexandre Artaud - Ingénieur Logiciel Full Stack",
+      en: "Alexandre Artaud - Full Stack Software Engineer",
+    },
+  },
   nav: {
     about: { fr: "À propos", en: "About" },
     projects: { fr: "Projets", en: "Projects" },
+    architecture: { fr: "Architecture", en: "Architecture" },
     experience: { fr: "Parcours pro", en: "Experience" },
     skills: { fr: "Compétences", en: "Skills" },
     homelab: { fr: "Homelab", en: "Homelab" },
@@ -16,6 +23,7 @@ export const dict = {
     },
     ctaProjects: { fr: "Voir mes projets", en: "See my projects" },
     ctaContact: { fr: "Me contacter", en: "Contact me" },
+    ctaCv: { fr: "Télécharger mon CV", en: "Download my resume" },
   },
   about: {
     title: { fr: "À propos", en: "About" },
@@ -38,6 +46,13 @@ export const dict = {
     subtitle: { fr: "Une sélection de mes réalisations open source", en: "A selection of my open source work" },
     seeAll: { fr: "Voir tous les projets", en: "See all projects" },
     featured: { fr: "Projet phare", en: "Featured" },
+  },
+  architecture: {
+    title: { fr: "Architecture", en: "Architecture" },
+    subtitle: {
+      fr: "Comment j'aborde la conception logicielle au-delà des technos",
+      en: "How I approach software design beyond the tech stack",
+    },
   },
   experience: {
     title: { fr: "Parcours pro", en: "Experience" },

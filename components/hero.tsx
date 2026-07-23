@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowRight, Mail } from "lucide-react";
+import { ArrowRight, Download, Mail } from "lucide-react";
 import { useEffect, useState } from "react";
 import { GithubIcon, LinkedinIcon } from "./icons";
 import { useLanguage, pick } from "@/lib/i18n";
@@ -46,6 +46,29 @@ function Avatar() {
         <span className="gradient-text text-6xl font-bold md:text-7xl">AA</span>
       )}
     </div>
+  );
+}
+
+function CvButton() {
+  const [available, setAvailable] = useState(false);
+  const { lang } = useLanguage();
+
+  useEffect(() => {
+    fetch("/cv.pdf", { method: "HEAD" })
+      .then((res) => setAvailable(res.ok))
+      .catch(() => setAvailable(false));
+  }, []);
+
+  if (!available) return null;
+
+  return (
+    <a
+      href="/cv.pdf"
+      download
+      className="btn-transition flex items-center gap-2 rounded-xl border border-[var(--border)] px-5 py-3 text-sm font-medium hover:border-[var(--accent)]"
+    >
+      <Download size={16} /> {pick(lang, dict.hero.ctaCv)}
+    </a>
   );
 }
 
@@ -108,6 +131,7 @@ export function Hero() {
             >
               {pick(lang, dict.hero.ctaContact)}
             </a>
+            <CvButton />
           </div>
 
           <div className="mt-8 flex gap-3">
