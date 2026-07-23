@@ -1,0 +1,10 @@
+services:
+  portfolio:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      # left  (EXTERNAL_PORT) -> host-facing port, change this to expose the app on a different port
+      # right (7000)          -> internal container port, fixed, must match nginx's `listen` directive in nginx.conf
+      - "${EXTERNAL_PORT:-7000}:7000"
+    restart: unless-stopped

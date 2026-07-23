@@ -1,0 +1,78 @@
+export const dict = {
+  nav: {
+    about: { fr: "À propos", en: "About" },
+    projects: { fr: "Projets", en: "Projects" },
+    experience: { fr: "Parcours pro", en: "Experience" },
+    skills: { fr: "Compétences", en: "Skills" },
+    homelab: { fr: "Homelab", en: "Homelab" },
+    contact: { fr: "Contact", en: "Contact" },
+  },
+  hero: {
+    greeting: { fr: "Bonjour, je suis", en: "Hi, I'm" },
+    role: { fr: "Ingénieur Logiciel Full Stack", en: "Full Stack Software Engineer" },
+    tagline: {
+      fr: "Je construis des systèmes que je peux self-host, du code auquel je peux faire confiance.",
+      en: "I build systems I can self-host, and code I can trust.",
+    },
+    ctaProjects: { fr: "Voir mes projets", en: "See my projects" },
+    ctaContact: { fr: "Me contacter", en: "Contact me" },
+  },
+  about: {
+    title: { fr: "À propos", en: "About" },
+    subtitle: { fr: "Ingénieur, self-hoster, curieux par nature", en: "Engineer, self-hoster, curious by nature" },
+    p1: {
+      fr: "Ingénieur informatique diplômé de l'UTBM, spécialisé en développement logiciel, je conçois et développe des applications web complètes, d'un ERP Microsoft Dynamics chez ABEO à des outils open source que j'héberge moi-même sur mon homelab.",
+      en: "A computer engineer graduated from UTBM specialized in software development, I design and build full-stack web applications, from a Microsoft Dynamics ERP at ABEO to open source tools I self-host on my own homelab.",
+    },
+    p2: {
+      fr: "Passionné par le self-hosting et l'infrastructure, la majorité de mes projets personnels visent à réduire la dépendance aux services cloud tiers : VPN, sauvegardes automatisées, sécurité réseau... Je code aussi bien en TypeScript qu'en Go, C# ou Rust selon ce que le problème exige vraiment.",
+      en: "Passionate about self-hosting and infrastructure, most of my personal projects aim to reduce reliance on third-party cloud services: VPN, automated backups, network security... I code in TypeScript as comfortably as in Go, C# or Rust, depending on what the problem actually needs.",
+    },
+    p3: {
+      fr: "Mon parcours en alternance, de Computacenter à l'UTBM puis ABEO, m'a appris à livrer du code fiable sur des systèmes critiques, tout en gardant le réflexe d'expérimenter sur mes propres infrastructures.",
+      en: "My work-study path, from Computacenter to UTBM and then ABEO, taught me to ship reliable code on critical systems, while keeping the habit of experimenting on my own infrastructure.",
+    },
+  },
+  projects: {
+    title: { fr: "Projets", en: "Projects" },
+    subtitle: { fr: "Une sélection de mes réalisations open source", en: "A selection of my open source work" },
+    seeAll: { fr: "Voir tous les projets", en: "See all projects" },
+    featured: { fr: "Projet phare", en: "Featured" },
+  },
+  experience: {
+    title: { fr: "Parcours pro", en: "Experience" },
+    subtitle: { fr: "Mon évolution professionnelle", en: "My professional journey" },
+    education: { fr: "Formation", en: "Education" },
+    certifications: { fr: "Certifications", en: "Certifications" },
+  },
+  skills: {
+    title: { fr: "Compétences", en: "Skills" },
+    subtitle: { fr: "Technologies et outils que je maîtrise", en: "Technologies and tools I work with" },
+  },
+  homelab: {
+    title: { fr: "Homelab", en: "Homelab" },
+    subtitle: { fr: "Mon terrain de jeu personnel : R.O.G.E.R", en: "My personal playground: R.O.G.E.R" },
+    specs: { fr: "Machine", en: "Machine" },
+    stack: { fr: "Infrastructure & technologies", en: "Infrastructure & technologies" },
+    apps: { fr: "Applications auto-hébergées", en: "Self-hosted applications" },
+    ownApps: { fr: "Mes outils, self-hostés", en: "My own tools, self-hosted" },
+  },
+  contact: {
+    status: { fr: "Ouvert aux missions ponctuelles", en: "Open to occasional missions" },
+    title: { fr: "Contact", en: "Contact" },
+    subtitle: { fr: "Discutons de votre prochain projet", en: "Let's talk about your next project" },
+    blurb: {
+      fr: "Je suis actuellement en CDI chez ABEO, mais je reste ouvert aux projets open source qui m'intéressent sur mon temps libre, ainsi qu'à des missions ponctuelles rémunérées selon disponibilité. Contactez-moi pour en discuter et obtenir mon TJM.",
+      en: "I'm currently full-time at ABEO, but I stay open to open source projects that interest me on my free time, as well as occasional paid missions depending on availability. Reach out to discuss and get my day rate.",
+    },
+    findMe: { fr: "Retrouvez-moi ici", en: "Find me here" },
+    discordCopied: { fr: "Copié !", en: "Copied!" },
+    emailLabel: { fr: "M'écrire un mail", en: "Send me an email" },
+    discordLabel: { fr: "Copier mon pseudo Discord", en: "Copy my Discord tag" },
+  },
+  footer: {
+    madeWith: { fr: "Fait avec", en: "Made with" },
+    by: { fr: "par", en: "by" },
+    rights: { fr: "Tous droits réservés.", en: "All rights reserved." },
+  },
+};
