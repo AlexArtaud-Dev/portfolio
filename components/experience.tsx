@@ -1,13 +1,21 @@
 "use client";
 
 import { Award, Briefcase, Calendar, CheckCircle2, Code2, GraduationCap } from "lucide-react";
+import { useEffect, useState } from "react";
 import { ScrollReveal } from "./scroll-reveal";
 import { experience, education, certifications, openSource } from "@/lib/data";
+import { formatDuration } from "@/lib/duration";
 import { useLanguage, pick } from "@/lib/i18n";
 import { dict } from "@/lib/dictionary";
 
 export function Experience() {
   const { lang } = useLanguage();
+  const [now, setNow] = useState<Date | null>(null);
+
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- client-only "now" to avoid SSR/CSR duration mismatch
+    setNow(new Date());
+  }, []);
 
   return (
     <section id="experience" className="mx-auto max-w-6xl px-6 py-28">
@@ -37,6 +45,7 @@ export function Experience() {
                     <h3 className="font-bold">{pick(lang, entry.role)}</h3>
                     <p className="text-sm text-[var(--accent)]">
                       {entry.org} · {entry.contract}
+                      {now && <> · {formatDuration(entry.startDate, entry.endDate, now, lang)}</>}
                     </p>
                     {entry.location && <p className="text-xs text-[var(--muted)]">{pick(lang, entry.location)}</p>}
                   </div>

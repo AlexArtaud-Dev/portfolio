@@ -176,6 +176,8 @@ export type ExperienceEntry = {
   org: string;
   contract: string;
   period: Bi;
+  startDate: string;
+  endDate: string | null;
   location?: Bi;
   description: Bi;
   points: Bi[];
@@ -187,6 +189,8 @@ export const experience: ExperienceEntry[] = [
     org: "ABEO",
     contract: "CDI",
     period: { fr: "Mars 2026 - Présent", en: "March 2026 - Present" },
+    startDate: "2026-03-01",
+    endDate: null,
     location: { fr: "Rioz, Bourgogne-Franche-Comté · Hybride", en: "Rioz, Bourgogne-Franche-Comté · Hybrid" },
     description: {
       fr: "Développement et maintien en conditions opérationnelles sur un ERP Microsoft Dynamics, avec un volet conformité réglementaire sur la facturation électronique.",
@@ -199,8 +203,16 @@ export const experience: ExperienceEntry[] = [
       },
       { fr: "Gestion documentaire via Lasernet", en: "Document management via Lasernet" },
       {
-        fr: "Participation à l'implémentation de la facturation électronique (intégration TX2 Cloud)",
-        en: "Contributed to e-invoicing implementation (TX2 Cloud integration)",
+        fr: "En charge de l'implémentation de la facturation électronique dans l'environnement AX12 (CU12 / CU7)",
+        en: "In charge of the e-invoicing implementation in the AX12 environment (CU12 / CU7)",
+      },
+      {
+        fr: "Conception et développement d'un configurateur de produits (Next.js, Redis, MySQL) connecté à D365, doté d'un moteur de configuration complet : attributs, groupes de configuration, contraintes, calculs, nomenclatures (BOM) et gammes (ROUTE)",
+        en: "Design and development of a product configurator (Next.js, Redis, MySQL) connected to D365, featuring a full configuration engine: attributes, configuration groups, constraints, calculations, BOM and routings",
+      },
+      {
+        fr: "Déploiement et hébergement du configurateur sur Azure : Azure CLI, Azure DevOps, pipelines CI/CD (build & release) et mise en production automatisée sur plusieurs environnements",
+        en: "Deployed and hosted on Azure: Azure CLI, Azure DevOps, CI/CD pipelines (build & release) and automated rollouts across multiple environments",
       },
     ],
   },
@@ -209,6 +221,8 @@ export const experience: ExperienceEntry[] = [
     org: "UTBM",
     contract: "CDD",
     period: { fr: "Septembre 2025 - Mars 2026", en: "September 2025 - March 2026" },
+    startDate: "2025-09-01",
+    endDate: "2026-03-01",
     location: { fr: "Belfort · Sur site", en: "Belfort · On-site" },
     description: {
       fr: "Projet de recherche sur l'automatisation de la sédation en réanimation, en lien direct avec le CHU et les équipes hospitalières.",
@@ -240,8 +254,10 @@ export const experience: ExperienceEntry[] = [
   {
     role: { fr: "Ingénieur (stage, CDD puis alternance)", en: "Engineer (internship, fixed-term, then work-study)" },
     org: "Computacenter",
-    contract: "3 ans 10 mois",
+    contract: "Stage → CDD → Alternance",
     period: { fr: "Novembre 2021 - Août 2025", en: "November 2021 - August 2025" },
+    startDate: "2021-11-01",
+    endDate: "2025-08-01",
     location: { fr: "Saint-Priest, Auvergne-Rhône-Alpes · Hybride", en: "Saint-Priest, Auvergne-Rhône-Alpes · Hybrid" },
     description: {
       fr: "Progression sur 3 contrats successifs (stage puis CDD puis alternance ingénieur) sur des applications métier critiques de supervision, avec une montée en responsabilité continue.",
@@ -279,6 +295,8 @@ export const experience: ExperienceEntry[] = [
     org: "HDM Network ASBL",
     contract: "Stage",
     period: { fr: "Février 2025 - Avril 2025", en: "February 2025 - April 2025" },
+    startDate: "2025-02-01",
+    endDate: "2025-04-01",
     location: { fr: "Belgique · À distance", en: "Belgium · Remote" },
     description: {
       fr: "Conception et développement complet d'une plateforme de mise en relation entre stagiaires/alternants et entreprises, avec un focus performance et expérience utilisateur.",

@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { ArrowRight, Download, Mail } from "lucide-react";
 import { useEffect, useState } from "react";
 import { GithubIcon, LinkedinIcon } from "./icons";
+import { Glitch } from "./glitch";
 import { useLanguage, pick } from "@/lib/i18n";
 import { dict } from "@/lib/dictionary";
 
@@ -27,6 +28,9 @@ function useStars(count: number) {
   return stars;
 }
 
+const AVATAR_FRAME_CLASS =
+  "relative flex h-56 w-56 items-center justify-center overflow-hidden rounded-full border-2 border-[var(--accent)] shadow-[0_0_60px_var(--accent-glow)] md:h-72 md:w-72";
+
 function Avatar() {
   const [available, setAvailable] = useState(false);
 
@@ -37,15 +41,19 @@ function Avatar() {
     img.src = "/avatar.jpg";
   }, []);
 
-  return (
-    <div className="relative flex h-56 w-56 items-center justify-center overflow-hidden rounded-full border-2 border-[var(--accent)] shadow-[0_0_60px_var(--accent-glow)] md:h-72 md:w-72">
-      {available ? (
-        // eslint-disable-next-line @next/next/no-img-element -- static local asset already verified client-side, next/image adds no value here
-        <img src="/avatar.jpg" alt="Alexandre Artaud" className="h-full w-full object-cover" />
-      ) : (
+  if (!available) {
+    return (
+      <div className={AVATAR_FRAME_CLASS}>
         <span className="gradient-text text-6xl font-bold md:text-7xl">AA</span>
-      )}
-    </div>
+      </div>
+    );
+  }
+
+  return (
+    <Glitch className={AVATAR_FRAME_CLASS}>
+      {/* eslint-disable-next-line @next/next/no-img-element -- static local asset already verified client-side, next/image adds no value here */}
+      <img src="/avatar.jpg" alt="Alexandre Artaud" className="h-full w-full object-cover" />
+    </Glitch>
   );
 }
 
