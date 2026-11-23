@@ -107,6 +107,8 @@ export type Project = {
   tags: string[];
   href: string;
   featured?: boolean;
+  /** Shown with the shared "Canopy plugin" badge */
+  canopyPlugin?: boolean;
 };
 
 export const projects: Project[] = [
@@ -145,17 +147,6 @@ export const projects: Project[] = [
     href: "https://github.com/AlexArtaud-Dev/Orbix",
   },
   {
-    slug: "dapple",
-    name: "dapple",
-    logo: "dapple",
-    description: {
-      fr: "Diffuse les vidéos locales vers les écrans du réseau (Chromecast / Google TV, DLNA / UPnP, Apple TV en AirPlay 2) depuis un seul binaire statique : découverte, appairage, télécommande en terminal et conversion à la volée via ffmpeg. Utilisable seul ou comme plugin Canopy.",
-      en: "Casts local videos to the screens on your network (Chromecast / Google TV, DLNA / UPnP, Apple TV over AirPlay 2) from one static binary: discovery, pairing, terminal remote and on-the-fly conversion with ffmpeg. Works standalone or as a Canopy plugin.",
-    },
-    tags: ["Rust", "Google Cast", "DLNA", "AirPlay"],
-    href: "https://github.com/AlexArtaud-Dev/dapple",
-  },
-  {
     slug: "facelock",
     name: "Facelock",
     logo: "facelock",
@@ -167,6 +158,18 @@ export const projects: Project[] = [
     href: "https://github.com/AlexArtaud-Dev/Facelock",
   },
   {
+    slug: "dapple",
+    name: "dapple",
+    logo: "dapple",
+    description: {
+      fr: "Diffuse les vidéos locales vers les écrans du réseau (Chromecast / Google TV, DLNA / UPnP, Apple TV en AirPlay 2) depuis un seul binaire statique : découverte, appairage, télécommande en terminal et conversion à la volée via ffmpeg. Utilisable seul ou comme plugin Canopy.",
+      en: "Casts local videos to the screens on your network (Chromecast / Google TV, DLNA / UPnP, Apple TV over AirPlay 2) from one static binary: discovery, pairing, terminal remote and on-the-fly conversion with ffmpeg. Works standalone or as a Canopy plugin.",
+    },
+    tags: ["Rust", "Google Cast", "DLNA", "AirPlay"],
+    href: "https://github.com/AlexArtaud-Dev/dapple",
+    canopyPlugin: true,
+  },
+  {
     slug: "mrename",
     name: "mrename",
     logo: "mrename",
@@ -176,6 +179,7 @@ export const projects: Project[] = [
     },
     tags: ["C", "CLI", "Pattern Matching"],
     href: "https://github.com/AlexArtaud-Dev/mrename",
+    canopyPlugin: true,
   },
   {
     slug: "vrconnect",

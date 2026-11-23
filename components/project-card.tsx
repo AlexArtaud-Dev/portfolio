@@ -22,6 +22,15 @@ export function ProjectCard({ project, lang }: { project: Project; lang: Lang })
             {pick(lang, dict.projects.featured)}
           </span>
         )}
+        {project.canopyPlugin && (
+          <a
+            href="#canopy"
+            className="btn-transition absolute left-4 top-4 flex items-center gap-1.5 rounded-full border border-[#6ac79c]/40 bg-[#6ac79c]/10 py-1 pl-1 pr-3 text-xs font-medium text-[#2f8f63] hover:border-[#6ac79c] hover:bg-[#6ac79c]/20 dark:text-[#8fdcb8]"
+          >
+            <Logo name="canopy" size={18} className="rounded-full" />
+            {pick(lang, dict.projects.canopyPlugin)}
+          </a>
+        )}
         <Logo
           name={project.logo}
           size={72}

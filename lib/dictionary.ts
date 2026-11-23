@@ -48,6 +48,7 @@ export const dict = {
     seeAll: { fr: "Voir tous les projets", en: "See all projects" },
     featured: { fr: "Projet phare", en: "Featured" },
     viewCode: { fr: "Voir le code", en: "View code" },
+    canopyPlugin: { fr: "Plugin Canopy", en: "Canopy plugin" },
   },
   canopy: {
     eyebrow: { fr: "Projet actuel", en: "Current project" },
