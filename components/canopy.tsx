@@ -6,6 +6,7 @@ import {
   ArrowRight,
   BookOpen,
   Check,
+  ChevronDown,
   Container,
   Database,
   Eye,
@@ -19,15 +20,39 @@ import {
   Puzzle,
   Share2,
   ShieldCheck,
+  Sparkles,
   Undo2,
   Users,
 } from "lucide-react";
+import { useRef, useState, type ReactNode } from "react";
+import { AnimatePresence, motion, type Variants } from "framer-motion";
 import { ScrollReveal } from "./scroll-reveal";
 import { GithubIcon } from "./icons";
 import { Logo } from "./logo";
 import { canopy } from "@/lib/data";
 import { useLanguage, pick, type Bi } from "@/lib/i18n";
 import { dict } from "@/lib/dictionary";
+
+const EASE = [0.22, 1, 0.36, 1] as const;
+
+const container: Variants = {
+  hidden: { transition: { staggerChildren: 0.03, staggerDirection: -1 } },
+  show: { transition: { staggerChildren: 0.07, delayChildren: 0.2 } },
+};
+
+const item: Variants = {
+  hidden: { opacity: 0, y: 28, scale: 0.97, filter: "blur(8px)" },
+  show: { opacity: 1, y: 0, scale: 1, filter: "blur(0px)", transition: { duration: 0.55, ease: EASE } },
+};
+
+/** Staggered reveal driven by the expanding container */
+function Reveal({ children, className }: { children: ReactNode; className?: string; delay?: number }) {
+  return (
+    <motion.div variants={item} className={className}>
+      {children}
+    </motion.div>
+  );
+}
 
 const featureIcons = {
   activity: Activity,
@@ -78,6 +103,20 @@ export function Canopy() {
   const { lang } = useLanguage();
   const t = (v: Bi) => pick(lang, v);
   const [web, engine, contracts, database] = canopy.architecture;
+  const [open, setOpen] = useState(false);
+  const toggleRef = useRef<HTMLButtonElement>(null);
+
+  const toggle = () => setOpen((v) => !v);
+
+  /** Collapse from the bottom of the details and bring the toggle back into view */
+  const collapse = () => {
+    const button = toggleRef.current;
+    if (button) {
+      const top = button.getBoundingClientRect().top + window.scrollY - window.innerHeight / 2;
+      window.scrollTo({ top, behavior: "smooth" });
+    }
+    setOpen(false);
+  };
 
   return (
     <section id="canopy" className="mx-auto max-w-6xl px-6 py-28">
@@ -141,15 +180,62 @@ export function Canopy() {
         </div>
       </ScrollReveal>
 
-      {/* Features */}
-      <ScrollReveal className="mt-16">
-        <SubHeading icon={Check}>{t(dict.canopy.features)}</SubHeading>
+      {/* Teaser + toggle */}
+      <ScrollReveal delay={0.15} className="mt-8 flex flex-col items-center gap-5">
+        <div className="flex items-center gap-3 text-xs text-[var(--muted)]">
+          <span>{t(dict.canopy.pluginsTeaser)}</span>
+          <div className="flex -space-x-2">
+            {canopy.plugins.map((plugin) => (
+              <Logo key={plugin.id} name={plugin.logo} size={28} className="rounded-[7px] ring-2 ring-[var(--background)]" />
+            ))}
+            <span
+              className="flex h-7 w-7 items-center justify-center rounded-[7px] border border-dashed ring-2 ring-[var(--background)]"
+              style={{ borderColor: "var(--accent)", background: "var(--background)" }}
+            >
+              <Plus size={14} className="text-[var(--accent)]" />
+            </span>
+          </div>
+        </div>
+
+        <button
+          ref={toggleRef}
+          type="button"
+          onClick={toggle}
+          aria-expanded={open}
+          aria-controls="canopy-details"
+          className="canopy-toggle group relative overflow-hidden rounded-full p-px"
+        >
+          <span className="canopy-toggle-ring" aria-hidden />
+          <span className="relative flex items-center gap-2 rounded-full bg-[var(--background)] px-6 py-3 text-sm font-medium btn-transition group-hover:bg-[var(--surface-solid)]">
+            <Sparkles size={15} className="text-[var(--accent)]" />
+            {t(open ? dict.canopy.showLess : dict.canopy.learnMore)}
+            <motion.span animate={{ rotate: open ? 180 : 0 }} transition={{ duration: 0.35, ease: EASE }} className="flex">
+              <ChevronDown size={16} className="text-[var(--accent)]" />
+            </motion.span>
+          </span>
+        </button>
       </ScrollReveal>
+
+      <AnimatePresence initial={false}>
+        {open && (
+          <motion.div
+            id="canopy-details"
+            key="canopy-details"
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1, transition: { height: { duration: 0.6, ease: EASE }, opacity: { duration: 0.3 } } }}
+            exit={{ height: 0, opacity: 0, transition: { height: { duration: 0.45, ease: EASE }, opacity: { duration: 0.25 } } }}
+            className="overflow-hidden"
+          >
+            <motion.div variants={container} initial="hidden" animate="show" exit="hidden" className="pb-2">
+      {/* Features */}
+      <Reveal className="mt-16">
+        <SubHeading icon={Check}>{t(dict.canopy.features)}</SubHeading>
+      </Reveal>
       <div className="mt-5 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {canopy.features.map((feature, i) => {
           const Icon = featureIcons[feature.icon as keyof typeof featureIcons];
           return (
-            <ScrollReveal key={feature.title.en} delay={0.05 * i}>
+            <Reveal key={feature.title.en} delay={0.05 * i}>
               <div className="glass-card h-full rounded-2xl p-5">
                 <div className="flex items-center gap-3">
                   <div
@@ -162,16 +248,16 @@ export function Canopy() {
                 </div>
                 <p className="mt-3 text-sm text-[var(--muted)]">{t(feature.text)}</p>
               </div>
-            </ScrollReveal>
+            </Reveal>
           );
         })}
       </div>
 
       {/* Architecture */}
-      <ScrollReveal className="mt-16">
+      <Reveal className="mt-16">
         <SubHeading icon={ShieldCheck}>{t(dict.canopy.architecture)}</SubHeading>
-      </ScrollReveal>
-      <ScrollReveal delay={0.1} className="glass-card mt-5 rounded-2xl p-6 md:p-8">
+      </Reveal>
+      <Reveal delay={0.1} className="glass-card mt-5 rounded-2xl p-6 md:p-8">
         <div className="flex flex-col items-stretch gap-2 md:flex-row md:items-center">
           <FlowNode icon={Globe} title={t(dict.canopy.browser)} caption="HTTPS" />
           <FlowArrow />
@@ -209,17 +295,17 @@ export function Canopy() {
             {t(canopy.delivery)}
           </p>
         </div>
-      </ScrollReveal>
+      </Reveal>
 
       {/* Plugins */}
-      <ScrollReveal className="mt-16">
+      <Reveal className="mt-16">
         <SubHeading icon={Puzzle}>{t(dict.canopy.plugins)}</SubHeading>
         <p className="mt-3 max-w-3xl text-sm leading-relaxed text-[var(--muted)]">{t(canopy.pluginsIntro)}</p>
-      </ScrollReveal>
+      </Reveal>
 
       <div className="mt-6 grid gap-6 md:grid-cols-2">
         {canopy.plugins.map((plugin, i) => (
-          <ScrollReveal key={plugin.id} delay={0.08 * i}>
+          <Reveal key={plugin.id} delay={0.08 * i}>
             <div className="glass-card group flex h-full flex-col rounded-2xl p-6">
               <div className="flex items-center gap-4">
                 <Logo name={plugin.logo} size={52} className="btn-transition shrink-0 drop-shadow-md group-hover:scale-105" />
@@ -251,11 +337,11 @@ export function Canopy() {
                 <GithubIcon size={14} /> {t(dict.projects.viewCode)}
               </a>
             </div>
-          </ScrollReveal>
+          </Reveal>
         ))}
       </div>
 
-      <ScrollReveal delay={0.1} className="mt-6">
+      <Reveal delay={0.1} className="mt-6">
         <div className="rounded-2xl border border-dashed p-6 md:p-8" style={{ borderColor: "var(--accent)" }}>
           <div className="grid gap-8 lg:grid-cols-2">
             <div>
@@ -307,7 +393,21 @@ export function Canopy() {
             </div>
           </div>
         </div>
-      </ScrollReveal>
+      </Reveal>
+              <Reveal className="mt-10 flex justify-center">
+                <button
+                  type="button"
+                  onClick={collapse}
+                  className="btn-transition flex items-center gap-2 rounded-full border border-[var(--border)] px-5 py-2 text-sm text-[var(--muted)] hover:border-[var(--accent)] hover:text-[var(--foreground)]"
+                >
+                  <ChevronDown size={15} className="rotate-180 text-[var(--accent)]" />
+                  {t(dict.canopy.showLess)}
+                </button>
+              </Reveal>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </section>
   );
 }

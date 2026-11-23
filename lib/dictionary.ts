@@ -50,7 +50,10 @@ export const dict = {
     viewCode: { fr: "Voir le code", en: "View code" },
   },
   canopy: {
-    eyebrow: { fr: "Projet principal", en: "Flagship project" },
+    eyebrow: { fr: "Projet actuel", en: "Current project" },
+    learnMore: { fr: "En savoir plus sur Canopy", en: "Learn more about Canopy" },
+    showLess: { fr: "Réduire", en: "Show less" },
+    pluginsTeaser: { fr: "Extensible par plugins", en: "Extensible with plugins" },
     subtitle: {
       fr: "Gestionnaire de fichiers self-hosted et écosystème de plugins open source",
       en: "Self-hosted file manager and open source plugin ecosystem",

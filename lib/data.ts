@@ -235,8 +235,8 @@ export const canopy = {
     en: "A self-hosted web file manager, built from scratch as a modern successor to FileBrowser.",
   },
   intro: {
-    fr: "Mon projet principal du moment. Canopy gère les dossiers d'un serveur depuis le navigateur avec une UX soignée, des opérations longues transparentes et une sécurité pensée dès la conception : l'interface n'exécute jamais de commande, chaque accès fichier est confiné par le moteur et chaque modification est autorisée côté serveur puis auditée.",
-    en: "My main project right now. Canopy manages a server's folders from the browser with a polished UX, transparent long operations and security by design: the interface never runs a command, every file access is confined by the engine and every change is authorized on the server, then audited.",
+    fr: "Mon projet actuel. Canopy gère les dossiers d'un serveur depuis le navigateur avec une UX soignée, des opérations longues transparentes et une sécurité pensée dès la conception : l'interface n'exécute jamais de commande, chaque accès fichier est confiné par le moteur et chaque modification est autorisée côté serveur puis auditée.",
+    en: "My current project. Canopy manages a server's folders from the browser with a polished UX, transparent long operations and security by design: the interface never runs a command, every file access is confined by the engine and every change is authorized on the server, then audited.",
   },
   stats: [
     { value: "40", label: { fr: "Releases publiées", en: "Releases shipped" } },

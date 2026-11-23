@@ -129,3 +129,29 @@ body {
   background: var(--accent-glow);
   color: var(--foreground);
 }
+
+/* Canopy "learn more" button: rotating gradient border + soft glow */
+.canopy-toggle {
+  box-shadow: 0 0 0 0 var(--accent-glow);
+  transition: box-shadow 0.3s ease, transform 0.2s ease;
+}
+
+.canopy-toggle:hover {
+  box-shadow: 0 0 28px -4px var(--accent-glow);
+  transform: translateY(-1px);
+}
+
+.canopy-toggle-ring {
+  position: absolute;
+  inset: -150%;
+  background: conic-gradient(from 0deg, transparent 0deg, #22d3ee 70deg, #3b82f6 140deg, transparent 220deg);
+  animation: canopy-spin 3.2s linear infinite;
+}
+
+@keyframes canopy-spin {
+  to { transform: rotate(360deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .canopy-toggle-ring { animation: none; background: var(--accent-gradient); }
+}
