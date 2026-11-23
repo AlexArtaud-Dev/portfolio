@@ -641,10 +641,30 @@ export const certifications: Certification[] = [
   },
 ];
 
+/** Generic pictograms for brands that Simple Icons no longer ships (mostly Microsoft) */
+export type SkillGlyph =
+  | "code"
+  | "building"
+  | "file"
+  | "cloud"
+  | "zap"
+  | "pipeline"
+  | "board"
+  | "terminal"
+  | "key"
+  | "shield"
+  | "activity"
+  | "database"
+  | "git";
+
 export type Skill = {
   name: string;
+  /** Simple Icons slug */
   slug?: string;
+  /** Hex color without # (icon tint) */
   color?: string;
+  /** Fallback pictogram when there is no Simple Icons slug */
+  glyph?: SkillGlyph;
 };
 
 export type SkillCategory = {
@@ -659,30 +679,72 @@ export const skills: SkillCategory[] = [
       { name: "TypeScript", slug: "typescript", color: "3178C6" },
       { name: "JavaScript", slug: "javascript", color: "F7DF1E" },
       { name: "Go", slug: "go", color: "00ADD8" },
-      { name: "C#", slug: "csharp", color: "239120" },
+      { name: "Rust", slug: "rust", color: "DEA584" },
+      { name: "C#", glyph: "code", color: "9B4F96" },
+      { name: "X++", glyph: "code", color: "0B53CE" },
       { name: "Python", slug: "python", color: "3776AB" },
-      { name: "Rust", slug: "rust", color: "000000" },
       { name: "PHP", slug: "php", color: "777BB4" },
-      { name: "C" },
+      { name: "Java", slug: "openjdk", color: "ED8B00" },
+      { name: "C", slug: "c", color: "A8B9CC" },
+      { name: "SQL", glyph: "database", color: "38BDF8" },
+      { name: "Bash", slug: "gnubash", color: "4EAA25" },
+    ],
+  },
+  {
+    title: { fr: "Microsoft Dynamics & ERP", en: "Microsoft Dynamics & ERP" },
+    skills: [
+      { name: "Dynamics 365 F&O", glyph: "building", color: "0B53CE" },
+      { name: "Dynamics AX 2012", glyph: "building", color: "1F5A96" },
+      { name: "Lasernet", glyph: "file", color: "E4002B" },
+      { name: "OData", glyph: "database", color: "F5A623" },
+      { name: "Visual Studio", glyph: "code", color: "8661C5" },
+      { name: "TFS", glyph: "git", color: "68217A" },
+      { name: ".NET", slug: "dotnet", color: "512BD4" },
+    ],
+  },
+  {
+    title: { fr: "Azure & Cloud", en: "Azure & Cloud" },
+    skills: [
+      { name: "Microsoft Azure", glyph: "cloud", color: "0078D4" },
+      { name: "Azure DevOps", glyph: "board", color: "0078D7" },
+      { name: "Azure Pipelines (CI/CD)", glyph: "pipeline", color: "2560E0" },
+      { name: "Azure Repos", glyph: "git", color: "0078D7" },
+      { name: "Azure Functions", glyph: "zap", color: "F5C400" },
+      { name: "Azure CLI", glyph: "terminal", color: "0078D4" },
+      { name: "Azure Cache for Redis", slug: "redis", color: "FF4438" },
+      { name: "Microsoft Entra ID", glyph: "shield", color: "0078D4" },
+      { name: "Azure Key Vault", glyph: "key", color: "F5C400" },
+      { name: "Application Insights", glyph: "activity", color: "8661C5" },
+      { name: "Cloudflare", slug: "cloudflare", color: "F38020" },
     ],
   },
   {
     title: { fr: "Frontend", en: "Frontend" },
     skills: [
       { name: "React", slug: "react", color: "61DAFB" },
-      { name: "Next.js", slug: "nextdotjs", color: "000000" },
-      { name: "Vite", slug: "vite", color: "646CFF" },
+      { name: "Next.js", slug: "nextdotjs", color: "94A3B8" },
       { name: "Tailwind CSS", slug: "tailwindcss", color: "06B6D4" },
+      { name: "shadcn/ui", slug: "shadcnui", color: "94A3B8" },
+      { name: "Vite", slug: "vite", color: "646CFF" },
+      { name: "TanStack Query", slug: "reactquery", color: "FF4154" },
+      { name: "Framer Motion", slug: "framer", color: "0055FF" },
+      { name: "Angular", slug: "angular", color: "DD0031" },
+      { name: "Alpine.js", slug: "alpinedotjs", color: "8BC0D0" },
+      { name: "Livewire", slug: "livewire", color: "FB70A9" },
     ],
   },
   {
-    title: { fr: "Backend", en: "Backend" },
+    title: { fr: "Backend & API", en: "Backend & API" },
     skills: [
-      { name: "Node.js", slug: "nodedotjs", color: "339933" },
+      { name: "Node.js", slug: "nodedotjs", color: "5FA04E" },
       { name: "NestJS", slug: "nestjs", color: "E0234E" },
-      { name: "Laravel", slug: "laravel", color: "FF2D20" },
       { name: "ASP.NET", slug: "dotnet", color: "512BD4" },
+      { name: "Laravel", slug: "laravel", color: "FF2D20" },
+      { name: "Spring Boot", slug: "spring", color: "6DB33F" },
       { name: "tRPC", slug: "trpc", color: "2596BE" },
+      { name: "OpenAPI", slug: "openapiinitiative", color: "6BA539" },
+      { name: "Better Auth", slug: "betterauth", color: "94A3B8" },
+      { name: "Socket.IO", slug: "socketdotio", color: "94A3B8" },
     ],
   },
   {
@@ -690,21 +752,32 @@ export const skills: SkillCategory[] = [
     skills: [
       { name: "PostgreSQL", slug: "postgresql", color: "4169E1" },
       { name: "MySQL", slug: "mysql", color: "4479A1" },
-      { name: "SQLite", slug: "sqlite", color: "003B57" },
-      { name: "SQL Server", slug: "microsoftsqlserver", color: "CC2927" },
-      { name: "Prisma", slug: "prisma", color: "2D3748" },
-      { name: "GORM" },
+      { name: "MariaDB", slug: "mariadb", color: "C0765A" },
+      { name: "SQL Server", glyph: "database", color: "CC2927" },
+      { name: "SQLite", slug: "sqlite", color: "0F80CC" },
+      { name: "MongoDB", slug: "mongodb", color: "47A248" },
+      { name: "Redis", slug: "redis", color: "FF4438" },
+      { name: "Prisma", slug: "prisma", color: "5A67D8" },
+      { name: "Drizzle", slug: "drizzle", color: "C5F74F" },
+      { name: "GORM", glyph: "database", color: "00ADD8" },
     ],
   },
   {
-    title: { fr: "DevOps, Cloud & Homelab", en: "DevOps, Cloud & Homelab" },
+    title: { fr: "DevOps, outils & homelab", en: "DevOps, tooling & homelab" },
     skills: [
       { name: "Docker", slug: "docker", color: "2496ED" },
       { name: "GitHub Actions", slug: "githubactions", color: "2088FF" },
+      { name: "Git", slug: "git", color: "F05032" },
+      { name: "VS Code", glyph: "code", color: "007ACC" },
+      { name: "pnpm", slug: "pnpm", color: "F69220" },
+      { name: "Vitest", slug: "vitest", color: "6E9F18" },
+      { name: "Linux", slug: "linux", color: "FCC624" },
       { name: "Nginx", slug: "nginx", color: "009639" },
+      { name: "Proxmox", slug: "proxmox", color: "E57000" },
       { name: "WireGuard", slug: "wireguard", color: "88171A" },
       { name: "Prometheus", slug: "prometheus", color: "E6522C" },
       { name: "Grafana", slug: "grafana", color: "F46800" },
+      { name: "ffmpeg", slug: "ffmpeg", color: "5CB85C" },
     ],
   },
 ];
@@ -712,7 +785,7 @@ export const skills: SkillCategory[] = [
 export const stats = [
   { value: "5+", label: { fr: "Ans d'expérience", en: "Years of experience" } },
   { value: "15+", label: { fr: "Projets open source", en: "Open source projects" } },
-  { value: "20+", label: { fr: "Technologies déjà utilisées", en: "Technologies worked with" } },
+  { value: "60+", label: { fr: "Technologies déjà utilisées", en: "Technologies worked with" } },
 ];
 
 export type OwnApp = {

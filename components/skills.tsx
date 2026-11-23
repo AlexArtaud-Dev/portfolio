@@ -1,15 +1,52 @@
 "use client";
 
 import Marquee from "react-fast-marquee";
-import { Code2 } from "lucide-react";
+import {
+  Activity,
+  Building2,
+  Cloud,
+  Code2,
+  Database,
+  FileText,
+  GitBranch,
+  KeyRound,
+  KanbanSquare,
+  ShieldCheck,
+  SquareTerminal,
+  Workflow,
+  Zap,
+} from "lucide-react";
 import { ScrollReveal } from "./scroll-reveal";
-import { skills, type Skill } from "@/lib/data";
+import { skills, type Skill, type SkillGlyph } from "@/lib/data";
 import { useLanguage, pick } from "@/lib/i18n";
 import { dict } from "@/lib/dictionary";
 
+const glyphs: Record<SkillGlyph, typeof Code2> = {
+  code: Code2,
+  building: Building2,
+  file: FileText,
+  cloud: Cloud,
+  zap: Zap,
+  pipeline: Workflow,
+  board: KanbanSquare,
+  terminal: SquareTerminal,
+  key: KeyRound,
+  shield: ShieldCheck,
+  activity: Activity,
+  database: Database,
+  git: GitBranch,
+};
+
 function SkillIcon({ skill }: { skill: Skill }) {
   if (!skill.slug) {
-    return <Code2 size={14} className="text-[var(--accent)]" />;
+    const Glyph = glyphs[skill.glyph ?? "code"];
+    return (
+      <Glyph
+        size={14}
+        className={skill.color ? undefined : "text-[var(--accent)]"}
+        style={skill.color ? { color: `#${skill.color}` } : undefined}
+      />
+    );
   }
   return (
     // eslint-disable-next-line @next/next/no-img-element -- tiny external brand icons from a public CDN, next/image adds no value
