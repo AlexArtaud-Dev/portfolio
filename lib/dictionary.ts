@@ -7,6 +7,7 @@ export const dict = {
   },
   nav: {
     about: { fr: "À propos", en: "About" },
+    canopy: { fr: "Canopy", en: "Canopy" },
     projects: { fr: "Projets", en: "Projects" },
     architecture: { fr: "Architecture", en: "Architecture" },
     experience: { fr: "Parcours pro", en: "Experience" },
@@ -33,8 +34,8 @@ export const dict = {
       en: "A computer engineer graduated from UTBM specialized in software development, I design and build full-stack web applications, from a Microsoft Dynamics ERP at ABEO to open source tools I self-host on my own homelab.",
     },
     p2: {
-      fr: "Passionné par le self-hosting et l'infrastructure, la majorité de mes projets personnels visent à réduire la dépendance aux services cloud tiers : VPN, sauvegardes automatisées, sécurité réseau... Je code aussi bien en TypeScript qu'en Go, C# ou Rust selon ce que le problème exige vraiment.",
-      en: "Passionate about self-hosting and infrastructure, most of my personal projects aim to reduce reliance on third-party cloud services: VPN, automated backups, network security... I code in TypeScript as comfortably as in Go, C# or Rust, depending on what the problem actually needs.",
+      fr: "Passionné par le self-hosting et l'infrastructure, la majorité de mes projets personnels visent à réduire la dépendance aux services cloud tiers : gestion de fichiers, VPN, sauvegardes automatisées, sécurité réseau... Je code aussi bien en TypeScript qu'en Go, C# ou Rust selon ce que le problème exige vraiment.",
+      en: "Passionate about self-hosting and infrastructure, most of my personal projects aim to reduce reliance on third-party cloud services: file management, VPN, automated backups, network security... I code in TypeScript as comfortably as in Go, C# or Rust, depending on what the problem actually needs.",
     },
     p3: {
       fr: "Mon parcours en alternance, de Computacenter à l'UTBM puis ABEO, m'a appris à livrer du code fiable sur des systèmes critiques, tout en gardant le réflexe d'expérimenter sur mes propres infrastructures.",
@@ -46,6 +47,27 @@ export const dict = {
     subtitle: { fr: "Une sélection de mes réalisations open source", en: "A selection of my open source work" },
     seeAll: { fr: "Voir tous les projets", en: "See all projects" },
     featured: { fr: "Projet phare", en: "Featured" },
+    viewCode: { fr: "Voir le code", en: "View code" },
+  },
+  canopy: {
+    eyebrow: { fr: "Projet principal", en: "Flagship project" },
+    subtitle: {
+      fr: "Gestionnaire de fichiers self-hosted et écosystème de plugins open source",
+      en: "Self-hosted file manager and open source plugin ecosystem",
+    },
+    code: { fr: "Code source", en: "Source code" },
+    docs: { fr: "Documentation", en: "Documentation" },
+    docker: { fr: "Docker Hub", en: "Docker Hub" },
+    features: { fr: "Ce que fait Canopy", en: "What Canopy does" },
+    architecture: { fr: "Architecture", en: "Architecture" },
+    browser: { fr: "Navigateur", en: "Browser" },
+    signedToken: { fr: "jeton court signé", en: "short-lived signed token" },
+    delivery: { fr: "Qualité & livraison", en: "Quality & delivery" },
+    plugins: { fr: "Écosystème de plugins", en: "Plugin ecosystem" },
+    officialPlugin: { fr: "Plugin officiel", en: "Official plugin" },
+    yourPlugin: { fr: "Ouvert à tous", en: "Open to anyone" },
+    pluginGuide: { fr: "Écrire un plugin", en: "Write a plugin" },
+    manifest: { fr: "Un manifeste suffit", en: "A manifest is all it takes" },
   },
   architecture: {
     title: { fr: "Architecture", en: "Architecture" },

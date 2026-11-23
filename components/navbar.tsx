@@ -7,7 +7,7 @@ import { LanguageToggle } from "./language-toggle";
 import { useLanguage, pick } from "@/lib/i18n";
 import { dict } from "@/lib/dictionary";
 
-const linkIds = ["about", "projects", "architecture", "experience", "skills", "homelab", "contact"] as const;
+const linkIds = ["about", "canopy", "projects", "architecture", "experience", "skills", "homelab", "contact"] as const;
 
 export function Navbar() {
   const { lang } = useLanguage();
@@ -53,7 +53,7 @@ export function Navbar() {
           AA
         </a>
 
-        <ul className="hidden items-center gap-8 md:flex">
+        <ul className="hidden items-center gap-7 lg:flex">
           {links.map((link) => (
             <li key={link.id}>
               <a
@@ -71,14 +71,14 @@ export function Navbar() {
           ))}
         </ul>
 
-        <div className="hidden items-center gap-3 md:flex">
+        <div className="hidden items-center gap-3 lg:flex">
           <LanguageToggle />
           <ThemeToggle />
         </div>
 
         <button
           type="button"
-          className="flex items-center justify-center md:hidden"
+          className="flex items-center justify-center lg:hidden"
           onClick={() => setOpen((v) => !v)}
           aria-label="Ouvrir le menu"
         >
@@ -87,7 +87,7 @@ export function Navbar() {
       </nav>
 
       {open && (
-        <div className="fixed inset-x-0 top-[65px] bottom-0 z-40 flex flex-col items-center justify-center gap-8 bg-[var(--background)] md:hidden">
+        <div className="fixed inset-x-0 top-[65px] bottom-0 z-40 flex flex-col items-center justify-center gap-8 bg-[var(--background)] lg:hidden">
           {links.map((link) => (
             <a
               key={link.id}

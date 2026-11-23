@@ -1,23 +1,12 @@
-import { Archive, Clapperboard, FileCheck2, Globe, ScanFace, Shield } from "lucide-react";
-import type { Project, ProjectIcon } from "@/lib/data";
+import type { Project } from "@/lib/data";
 import { pick, type Lang } from "@/lib/i18n";
 import { dict } from "@/lib/dictionary";
 import { GithubIcon } from "./icons";
-
-const icons: Record<ProjectIcon, typeof Shield> = {
-  shield: Shield,
-  archive: Archive,
-  scanface: ScanFace,
-  globe: Globe,
-  clapperboard: Clapperboard,
-  filecheck: FileCheck2,
-};
+import { Logo } from "./logo";
 
 export function ProjectCard({ project, lang }: { project: Project; lang: Lang }) {
-  const Icon = icons[project.icon];
-
   return (
-    <div className="glass-card flex h-full flex-col overflow-hidden rounded-2xl">
+    <div className="glass-card group flex h-full flex-col overflow-hidden rounded-2xl">
       <div
         className="relative flex h-40 items-center justify-center"
         style={{
@@ -33,12 +22,11 @@ export function ProjectCard({ project, lang }: { project: Project; lang: Lang })
             {pick(lang, dict.projects.featured)}
           </span>
         )}
-        <div
-          className="flex h-16 w-16 items-center justify-center rounded-2xl"
-          style={{ background: "var(--accent-soft)" }}
-        >
-          <Icon size={28} className="text-[var(--accent)]" />
-        </div>
+        <Logo
+          name={project.logo}
+          size={72}
+          className="btn-transition drop-shadow-lg group-hover:scale-105"
+        />
       </div>
 
       <div className="flex flex-1 flex-col p-6">
@@ -62,7 +50,7 @@ export function ProjectCard({ project, lang }: { project: Project; lang: Lang })
           rel="noreferrer"
           className="btn-transition mt-5 flex w-fit items-center gap-2 rounded-xl border border-[var(--border)] px-4 py-2 text-sm font-medium hover:border-[var(--accent)]"
         >
-          <GithubIcon size={14} /> {lang === "fr" ? "Voir le code" : "View code"}
+          <GithubIcon size={14} /> {pick(lang, dict.projects.viewCode)}
         </a>
       </div>
     </div>

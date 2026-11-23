@@ -2,6 +2,7 @@
 
 import { Cpu, ExternalLink, Server, ShieldCheck, Sparkles } from "lucide-react";
 import { ScrollReveal } from "./scroll-reveal";
+import { Logo } from "./logo";
 import { homelab, type Skill } from "@/lib/data";
 import { useLanguage, pick } from "@/lib/i18n";
 import { dict } from "@/lib/dictionary";
@@ -101,6 +102,7 @@ export function Homelab() {
                 className="btn-transition flex items-center gap-2 rounded-xl px-3.5 py-2 text-sm font-medium text-white hover:opacity-90"
                 style={{ background: "var(--accent-gradient)" }}
               >
+                <Logo name={app.logo} size={18} className="rounded-[5px]" />
                 {app.name}
                 <ExternalLink size={12} />
               </a>

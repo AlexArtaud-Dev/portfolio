@@ -29,6 +29,9 @@ export const metadata: Metadata = {
     "TypeScript",
     "Self-hosting",
     "Homelab",
+    "Canopy",
+    "Go",
+    "Rust",
   ],
   alternates: {
     canonical: "/",

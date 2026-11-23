@@ -19,6 +19,14 @@ export const architecture: ArchitecturePillar[] = [
     },
     points: [
       {
+        fr: "Canopy : contrat OpenAPI 3.1 unique d'où sont générés le serveur Go et le client TypeScript",
+        en: "Canopy: a single OpenAPI 3.1 contract generating both the Go server and the TypeScript client",
+      },
+      {
+        fr: "Homedex : architecture hexagonale (domain → application → infrastructure), intégrations ajoutées en implémentant un port",
+        en: "Homedex: hexagonal architecture (domain → application → infrastructure), integrations added by implementing a port",
+      },
+      {
         fr: "Velar (Go) : couches handlers/services/repositories découplées de la persistance GORM",
         en: "Velar (Go): handlers/services/repositories layers decoupled from GORM persistence",
       },
@@ -40,6 +48,10 @@ export const architecture: ArchitecturePillar[] = [
       en: "End-to-end typed APIs and services I can actually monitor in production.",
     },
     points: [
+      {
+        fr: "Canopy : chaque opération longue est un job avec progression live, annulation et résultat lisible",
+        en: "Canopy: every long operation is a job with live progress, cancel and a readable result",
+      },
       {
         fr: "API typées de bout en bout avec tRPC (plateforme HDM Network)",
         en: "End-to-end typed APIs with tRPC (HDM Network platform)",
@@ -63,6 +75,14 @@ export const architecture: ArchitecturePillar[] = [
     },
     points: [
       {
+        fr: "Canopy : aucun shell depuis l'UI, accès fichiers confinés par os.Root, moteur interne joignable uniquement via des jetons courts signés",
+        en: "Canopy: no shell from the UI, file access confined with os.Root, internal engine reachable only through short-lived signed tokens",
+      },
+      {
+        fr: "Plugins Canopy installés uniquement depuis des dépôts autorisés, binaires vérifiés par SHA-256",
+        en: "Canopy plugins installed only from allowlisted repositories, binaries verified by SHA-256",
+      },
+      {
         fr: "Authentification JWT + refresh token httpOnly, TOTP et hachage bcrypt sur Velar",
         en: "JWT + httpOnly refresh token authentication, TOTP and bcrypt hashing on Velar",
       },
@@ -74,102 +94,327 @@ export const architecture: ArchitecturePillar[] = [
         fr: "Authentification centralisée LDAP + Authelia sur le homelab",
         en: "Centralized LDAP + Authelia authentication on the homelab",
       },
-      {
-        fr: "Durcissement et sécurisation d'une application Laravel critique chez Computacenter",
-        en: "Hardening and securing a critical Laravel application at Computacenter",
-      },
     ],
   },
 ];
 
-export type ProjectIcon = "shield" | "archive" | "scanface" | "globe" | "clapperboard" | "filecheck";
-
 export type Project = {
   slug: string;
   name: string;
+  /** File name (without extension) of the logo in public/logos */
+  logo: string;
   description: Bi;
   tags: string[];
   href: string;
-  icon: ProjectIcon;
   featured?: boolean;
-  cta: "project" | "code";
 };
 
 export const projects: Project[] = [
   {
     slug: "velar",
     name: "Velar",
+    logo: "velar",
     description: {
-      fr: "Tableau de bord WireGuard self-hosted construit de zéro : gestion multi-interfaces, cycle de vie des clients (QR code, quotas, suspension auto), métriques Prometheus/Grafana, hub développeur avec testeur d'API et 4 thèmes UI.",
-      en: "Self-hosted WireGuard dashboard built from scratch: multi-interface management, client lifecycle (QR code, quotas, auto-suspend), Prometheus/Grafana metrics, developer hub with API tester and 4 UI themes.",
+      fr: "Tableau de bord WireGuard self-hosted construit de zéro : multi-interfaces, fédération multi-instances (maître/esclaves), cycle de vie des clients (QR code, quotas, suspension auto), limitation de bande passante, AdGuard Home intégré, TOTP et métriques Prometheus/Grafana.",
+      en: "Self-hosted WireGuard dashboard built from scratch: multi-interface, multi-instance federation (master/slaves), client lifecycle (QR code, quotas, auto-suspend), bandwidth limiting, built-in AdGuard Home, TOTP and Prometheus/Grafana metrics.",
     },
-    tags: ["Go", "React", "TypeScript", "GORM", "shadcn/ui"],
+    tags: ["Go", "React", "TypeScript", "SQLite", "WireGuard"],
     href: "https://github.com/AlexArtaud-Dev/Velar",
-    icon: "shield",
     featured: true,
-    cta: "code",
+  },
+  {
+    slug: "homedex",
+    name: "Homedex",
+    logo: "homedex",
+    description: {
+      fr: "Dashboard de homelab modulaire : cartes de services avec statut et stats en direct (Jellyfin, Proxmox, OpenMediaVault, Portainer, Nextcloud, Tailscale), widgets, sections en drag & drop et un panneau d'admin complet, sans YAML ni rebuild. Architecture hexagonale + worker de fond.",
+      en: "Modular homelab dashboard: service cards with live status and stats (Jellyfin, Proxmox, OpenMediaVault, Portainer, Nextcloud, Tailscale), widgets, drag & drop sections and a full admin panel, no YAML and no rebuild. Hexagonal architecture + background worker.",
+    },
+    tags: ["Next.js", "TypeScript", "PostgreSQL", "Prisma", "dnd-kit"],
+    href: "https://github.com/AlexArtaud-Dev/homedex",
   },
   {
     slug: "orbix",
     name: "Orbix",
+    logo: "orbix",
     description: {
-      fr: "Plateforme d'automatisation de sauvegardes self-hosted : wizard de création en 6 étapes, chiffrement AES-256-GCM, cron avancé multi-règles, vault de credentials chiffré et pipeline visualizer animé.",
-      en: "Self-hosted backup automation platform: 6-step creation wizard, AES-256-GCM encryption, advanced multi-rule cron, encrypted credentials vault and animated pipeline visualizer.",
+      fr: "Gestionnaire de pipelines de sauvegarde self-hosted : sources locales, API HTTP (OAuth2) ou SFTP, archives zip/tar chiffrées AES-256, envoi par email ou SSH, planification cron, vault de credentials chiffré, dashboard et logs structurés en temps réel.",
+      en: "Self-hosted backup pipeline manager: local, HTTP API (OAuth2) or SFTP sources, AES-256 encrypted zip/tar archives, delivery by email or SSH, cron scheduling, encrypted credentials vault, dashboard and real-time structured logs.",
     },
     tags: ["TypeScript", "NestJS", "Next.js", "Prisma"],
     href: "https://github.com/AlexArtaud-Dev/Orbix",
-    icon: "archive",
-    cta: "code",
+  },
+  {
+    slug: "stockhome",
+    name: "StockHome",
+    logo: "stockhome",
+    description: {
+      fr: "Inventaire domestique intelligent : pièces et contenants avec QR codes, suivi des dates de péremption, liste de courses générée depuis des seuils de stock, historique exportable, alertes email planifiées et export PDF. Multi-foyers, FR/EN.",
+      en: "Smart household inventory: rooms and containers with QR codes, expiry tracking, shopping list generated from stock thresholds, exportable history, scheduled email alerts and PDF export. Multi-household, FR/EN.",
+    },
+    tags: ["NestJS", "React", "TypeScript", "SQLite"],
+    href: "https://github.com/AlexArtaud-Dev/StockHome",
   },
   {
     slug: "facelock",
     name: "Facelock",
+    logo: "facelock",
     description: {
-      fr: "Verrouillage automatique de session Windows par reconnaissance faciale. Pipeline CPU-only (YuNet + SFace), application de fond de tâche légère, ne fait confiance qu'aux visages enregistrés.",
-      en: "Automatic Windows session lock via facial recognition. CPU-only pipeline (YuNet + SFace), lightweight tray app, only trusts enrolled faces.",
+      fr: "Verrouillage automatique de session Windows par reconnaissance faciale. Pipeline CPU-only (YuNet + SFace), application de fond de tâche légère, ne fait confiance qu'aux visages enregistrés. 100 % local, aucune photo stockée.",
+      en: "Automatic Windows session lock via facial recognition. CPU-only pipeline (YuNet + SFace), lightweight tray app, only trusts enrolled faces. 100% local, no photos stored.",
     },
     tags: ["Python", "OpenCV", "Computer Vision"],
     href: "https://github.com/AlexArtaud-Dev/Facelock",
-    icon: "scanface",
-    cta: "code",
   },
   {
-    slug: "cloudflare-dyn-wan-ip-fixer",
-    name: "CloudflareDynWanIPFixer",
+    slug: "fsnav",
+    name: "fsnav",
+    logo: "fsnav",
     description: {
-      fr: "Mise à jour automatique d'un enregistrement DNS Cloudflare selon l'IP WAN dynamique du réseau. Vérifications périodiques, alertes email et déploiement Docker, entièrement configurable via .env.",
-      en: "Automatically updates a Cloudflare DNS record based on the network's dynamic WAN IP. Periodic checks, email alerts and Docker deployment, fully configurable via .env.",
+      fr: "Navigateur de système de fichiers en terminal : recherche regex et dans le contenu, aperçu des fichiers, favoris, double panneau, sélection par motifs et gestion des permissions. Publié sur crates.io.",
+      en: "Terminal file system navigator: regex and content search, live file preview, bookmarks, split pane, pattern selection and a permission manager. Published on crates.io.",
     },
-    tags: ["TypeScript", "Docker", "Cloudflare API"],
-    href: "https://github.com/AlexArtaud-Dev-Personnal-Projects/CloudflareDynWanIPFixer",
-    icon: "globe",
-    cta: "code",
+    tags: ["Rust", "TUI", "crates.io"],
+    href: "https://github.com/AlexArtaud-Dev/fsnav",
   },
   {
-    slug: "mrename",
-    name: "mrename",
+    slug: "vrconnect",
+    name: "VRConnect",
+    logo: "vrconnect",
     description: {
-      fr: "Outil CLI de renommage intelligent pour séries TV : reconnaissance de plus de 10 patterns de nommage, analyse en temps réel et mode de prévisualisation sécurisé avant tout renommage en masse.",
-      en: "Smart CLI renaming tool for TV series: recognizes 10+ naming patterns, real-time analysis and a safe preview mode before any bulk rename.",
+      fr: "Middleware Rust de données vitales médicales en temps réel : serveur Socket.IO (décompression zlib), nettoyage et validation des données, sorties console, serveur BLE GATT et enregistrement avec rotation des fichiers.",
+      en: "Rust middleware for real-time medical vital data: Socket.IO server (zlib decompression), data cleaning and validation, console output, BLE GATT server and file recording with rotation.",
     },
-    tags: ["C", "CLI", "Pattern Matching"],
-    href: "https://github.com/AlexArtaud-Dev/mrename",
-    icon: "clapperboard",
-    cta: "code",
+    tags: ["Rust", "Socket.IO", "Bluetooth LE"],
+    href: "https://github.com/AlexArtaud-Dev/VRConnect",
   },
   {
     slug: "pdfaforge",
     name: "PdfAForge",
+    logo: "pdfaforge",
     description: {
       fr: "Service ASP.NET WebAPI léger pour convertir des fichiers PDF au format PDF/A-3B. Conçu pour la conformité facturation électronique en entreprise (Factur-X / NF Z 55-300).",
       en: "Lightweight ASP.NET WebAPI service to convert PDF files to PDF/A-3B. Built for enterprise e-invoicing compliance (Factur-X / NF Z 55-300).",
     },
     tags: ["C#", "ASP.NET", "WebAPI"],
     href: "https://github.com/AlexArtaud-Dev/PdfAForge",
-    icon: "filecheck",
-    cta: "code",
+  },
+  {
+    slug: "cloudflare-dyn-wan-ip-fixer",
+    name: "CloudflareDynWanIPFixer",
+    logo: "cloudflare-dyn-wan-ip-fixer",
+    description: {
+      fr: "Mise à jour automatique d'un enregistrement DNS Cloudflare selon l'IP WAN dynamique du réseau. Vérifications périodiques, alertes email et déploiement Docker, entièrement configurable via .env.",
+      en: "Automatically updates a Cloudflare DNS record based on the network's dynamic WAN IP. Periodic checks, email alerts and Docker deployment, fully configurable via .env.",
+    },
+    tags: ["TypeScript", "Docker", "Cloudflare API"],
+    href: "https://github.com/AlexArtaud-Dev-Personnal-Projects/CloudflareDynWanIPFixer",
   },
 ];
+
+export type CanopyPlugin = {
+  id: string;
+  name: string;
+  logo: string;
+  language: string;
+  version: string;
+  description: Bi;
+  points: Bi[];
+  href: string;
+};
+
+export const canopy = {
+  name: "Canopy",
+  logo: "canopy",
+  repo: "https://github.com/AlexArtaud-Dev/Canopy",
+  wiki: "https://github.com/AlexArtaud-Dev/Canopy/wiki",
+  dockerHub: "https://hub.docker.com/r/izoniks/canopy",
+  pluginGuide: "https://github.com/AlexArtaud-Dev/Canopy/blob/main/docs/integrations/writing-a-plugin.md",
+  tagline: {
+    fr: "Un gestionnaire de fichiers web self-hosted, construit de zéro comme successeur moderne de FileBrowser.",
+    en: "A self-hosted web file manager, built from scratch as a modern successor to FileBrowser.",
+  },
+  intro: {
+    fr: "Mon projet principal du moment. Canopy gère les dossiers d'un serveur depuis le navigateur avec une UX soignée, des opérations longues transparentes et une sécurité pensée dès la conception : l'interface n'exécute jamais de commande, chaque accès fichier est confiné par le moteur et chaque modification est autorisée côté serveur puis auditée.",
+    en: "My main project right now. Canopy manages a server's folders from the browser with a polished UX, transparent long operations and security by design: the interface never runs a command, every file access is confined by the engine and every change is authorized on the server, then audited.",
+  },
+  stats: [
+    { value: "40", label: { fr: "Releases publiées", en: "Releases shipped" } },
+    { value: "159", label: { fr: "PR mergées", en: "Merged PRs" } },
+    { value: "3", label: { fr: "Langues (FR/EN/ES)", en: "Languages (EN/FR/ES)" } },
+    { value: "~20 Mo", label: { fr: "Image du moteur Go", en: "Go engine image" } },
+  ],
+  features: [
+    {
+      icon: "activity",
+      title: { fr: "Opérations transparentes", en: "Transparent operations" },
+      text: {
+        fr: "Chaque tâche longue (copie, zip, upload reprenable) est un job avec progression live, annulation et résultat lisible.",
+        en: "Every long task (copy, zip, resumable upload) is a job with live progress, cancel and a readable result.",
+      },
+    },
+    {
+      icon: "undo",
+      title: { fr: "Corbeille & annulation", en: "Trash & undo" },
+      text: {
+        fr: "Corbeille avec restauration, confirmation et annulation des actions destructrices, audit de chaque changement.",
+        en: "Trash with restore, confirmation and undo for destructive actions, every change audited.",
+      },
+    },
+    {
+      icon: "share",
+      title: { fr: "Partage & dépôts", en: "Sharing & drop-offs" },
+      text: {
+        fr: "Liens de partage (expiration, mot de passe, limite de téléchargements) et liens de dépôt filtrés par type et taille.",
+        en: "Share links (expiry, password, download limit) and upload links filtered by file type and size.",
+      },
+    },
+    {
+      icon: "users",
+      title: { fr: "Rôles & droits par dossier", en: "Roles & folder rights" },
+      text: {
+        fr: "Utilisateurs, groupes, matrice de permissions, règles d'accès par dossier, invitations, TOTP et codes de secours.",
+        en: "Users, groups, permission matrix, per-folder access rules, invitations, TOTP and recovery codes.",
+      },
+    },
+    {
+      icon: "eye",
+      title: { fr: "Aperçus & streaming", en: "Previews & streaming" },
+      text: {
+        fr: "Images, PDF, code, audio, vidéo ; MKV et autres formats convertis à la volée par ffmpeg. Vues liste et grille 10k+ entrées.",
+        en: "Images, PDF, code, audio, video; MKV and other formats converted on the fly by ffmpeg. List and grid views for 10k+ entries.",
+      },
+    },
+    {
+      icon: "layout",
+      title: { fr: "Dashboards & PWA", en: "Dashboards & PWA" },
+      text: {
+        fr: "Tableaux de bord personnels, application installable, thèmes clair/sombre, interface responsive tactile et clavier.",
+        en: "Personal dashboards, installable app, light/dark themes, responsive touch- and keyboard-friendly interface.",
+      },
+    },
+  ],
+  architecture: [
+    {
+      name: "web",
+      tech: "Next.js · TypeScript · Better Auth · Drizzle",
+      role: {
+        fr: "Seul point d'entrée public : UI, authentification, autorisations, audit",
+        en: "The only public entry point: UI, authentication, authorization, audit",
+      },
+    },
+    {
+      name: "engine",
+      tech: "Go · os.Root · distroless",
+      role: {
+        fr: "Réseau interne uniquement, n'accepte que des jetons courts signés par le web ; accès fichiers confiné à la racine, jobs, plugins",
+        en: "Internal network only, accepts only short-lived tokens signed by the web app; root-confined file access, jobs, plugins",
+      },
+    },
+    {
+      name: "contracts",
+      tech: "OpenAPI 3.1",
+      role: {
+        fr: "Source unique de vérité : code Go et TypeScript générés, aucune dérive entre les deux",
+        en: "Single source of truth: generated Go and TypeScript code, no drift between both sides",
+      },
+    },
+    {
+      name: "database",
+      tech: "PostgreSQL",
+      role: {
+        fr: "Un rôle par application, schémas auth / app / audit séparés",
+        en: "One role per app, separate auth / app / audit schemas",
+      },
+    },
+  ],
+  delivery: {
+    fr: "Monorepo pnpm, CI à 9 checks obligatoires (lint, types, tests, couverture ≥ 90 % sur les paquets Go purs, changelog trilingue), commits signés, release automatisée vers GHCR et Docker Hub en amd64/arm64, documentation publiée sur le wiki à chaque merge.",
+    en: "pnpm monorepo, CI with 9 required checks (lint, types, tests, ≥ 90% coverage on pure Go packages, trilingual changelog), signed commits, automated releases to GHCR and Docker Hub for amd64/arm64, documentation published to the wiki on every merge.",
+  },
+  pluginsIntro: {
+    fr: "Canopy ne lance jamais de shell : ses commandes sont un catalogue d'outils typés. Ce catalogue est extensible par plugins, et le format est volontairement générique : n'importe quel outil en ligne de commande open source, dans n'importe quel langage, peut devenir un module Canopy.",
+    en: "Canopy never runs a shell: its commands are a catalog of typed tools. That catalog is extensible through plugins, and the format is deliberately generic: any open source command-line tool, in any language, can become a Canopy module.",
+  },
+  plugins: [
+    {
+      id: "mrename",
+      name: "mrename",
+      logo: "mrename",
+      language: "C",
+      version: "v1.1.0",
+      description: {
+        fr: "Renommage en masse d'épisodes de séries avec détection automatique parmi 10+ motifs de nommage.",
+        en: "Bulk renaming of TV series episodes with automatic detection among 10+ naming patterns.",
+      },
+      points: [
+        { fr: "Mode non interactif pensé pour Canopy (--pattern auto, --dry-run)", en: "Non-interactive mode built for Canopy (--pattern auto, --dry-run)" },
+        { fr: "Clic droit sur un dossier → simulation puis renommage, avec progression live", en: "Right-click a folder → simulate then rename, with live progress" },
+        { fr: "Binaires statiques linux amd64/arm64 publiés par tag", en: "Static linux amd64/arm64 binaries published on tag" },
+      ],
+      href: "https://github.com/AlexArtaud-Dev/mrename",
+    },
+    {
+      id: "dapple",
+      name: "dapple",
+      logo: "dapple",
+      language: "Rust",
+      version: "v0.5.0",
+      description: {
+        fr: "Diffuse les vidéos locales vers les écrans du réseau : Chromecast / Google TV, DLNA / UPnP et Apple TV (AirPlay 2). Un seul binaire statique.",
+        en: "Casts local videos to the screens on your network: Chromecast / Google TV, DLNA / UPnP and Apple TV (AirPlay 2). One static binary.",
+      },
+      points: [
+        { fr: "Découverte et appairage des écrans, gérés dans Administration › Appareils", en: "Screen discovery and pairing, managed in Administration › Devices" },
+        { fr: "Télécommande live dans Canopy : pause, reprise, avance, volume, stop", en: "Live remote inside Canopy: pause, resume, seek, volume, stop" },
+        { fr: "Conversion à la volée (ffmpeg / HLS) de ce que l'écran ne lit pas", en: "On-the-fly conversion (ffmpeg / HLS) of what the screen can't play" },
+      ],
+      href: "https://github.com/AlexArtaud-Dev/dapple",
+    },
+  ] as CanopyPlugin[],
+  genericity: {
+    title: { fr: "Votre outil, en module Canopy", en: "Your tool, as a Canopy module" },
+    text: {
+      fr: "Pas de SDK, pas de dépendance à Canopy : une release GitHub suffit. N'importe qui peut publier son propre module open source, l'administrateur n'a qu'à autoriser le dépôt.",
+      en: "No SDK, no dependency on Canopy: a GitHub release is enough. Anyone can publish their own open source module; the administrator just allows the repository.",
+    },
+    steps: [
+      {
+        fr: "Publier une release avec canopy-plugin.yaml, des binaires statiques linux et un fichier SHA256SUMS",
+        en: "Publish a release with canopy-plugin.yaml, static linux binaries and a SHA256SUMS file",
+      },
+      {
+        fr: "Décrire ses commandes : paramètres typés (chemin, booléen, entier, liste…), droits requis, parser de progression",
+        en: "Describe the commands: typed params (path, bool, int, enum…), required rights, progress parser",
+      },
+      {
+        fr: "Canopy vérifie le manifeste et le SHA-256, stocke le binaire et l'exécute sans shell, avec les droits de l'utilisateur",
+        en: "Canopy checks the manifest and SHA-256, stores the binary and runs it without a shell, under the user's rights",
+      },
+      {
+        fr: "Options avancées : appareils réseau, télécommande, choix détectés (Detect), données persistantes par plugin",
+        en: "Advanced options: network devices, remote control, detected choices (Detect), per-plugin persistent data",
+      },
+    ],
+    manifest: `id: mytool
+name: { en: My tool, fr: Mon outil }
+version: 1.2.0
+binary: mytool
+source:
+  repo: you/mytool
+  checksums: SHA256SUMS
+  assets:
+    linux-amd64: mytool-linux-amd64
+commands:
+  - id: mytool.run
+    params:
+      - name: folder
+        type: path
+        access: update
+    args: ['{flags}', '{folder}']
+    progressParser: line-count`,
+  },
+};
 
 export type ExperienceEntry = {
   role: Bi;
@@ -319,8 +564,8 @@ export const experience: ExperienceEntry[] = [
 export const openSource = {
   since: { fr: "Depuis septembre 2020", en: "Since September 2020" },
   text: {
-    fr: "En parallèle, je développe et self-host mes propres outils open source (Velar, Orbix, Facelock...) sur mon temps libre.",
-    en: "Alongside this, I build and self-host my own open source tools (Velar, Orbix, Facelock...) on my free time.",
+    fr: "En parallèle, je développe et self-host mes propres outils open source (Canopy et ses plugins, Velar, Homedex, Orbix...) sur mon temps libre.",
+    en: "Alongside this, I build and self-host my own open source tools (Canopy and its plugins, Velar, Homedex, Orbix...) on my free time.",
   },
 };
 
@@ -462,13 +707,14 @@ export const skills: SkillCategory[] = [
 
 export const stats = [
   { value: "5+", label: { fr: "Ans d'expérience", en: "Years of experience" } },
-  { value: "12+", label: { fr: "Projets open source", en: "Open source projects" } },
+  { value: "15+", label: { fr: "Projets open source", en: "Open source projects" } },
   { value: "20+", label: { fr: "Technologies déjà utilisées", en: "Technologies worked with" } },
 ];
 
 export type OwnApp = {
   name: string;
   href: string;
+  logo: string;
 };
 
 export const homelab = {
@@ -543,8 +789,11 @@ export const homelab = {
     { name: "MCSManager" },
   ],
   ownApps: [
-    { name: "Velar", href: "https://github.com/AlexArtaud-Dev/Velar" },
-    { name: "Orbix", href: "https://github.com/AlexArtaud-Dev/Orbix" },
+    { name: "Canopy", href: "https://github.com/AlexArtaud-Dev/Canopy", logo: "canopy" },
+    { name: "dapple", href: "https://github.com/AlexArtaud-Dev/dapple", logo: "dapple" },
+    { name: "Homedex", href: "https://github.com/AlexArtaud-Dev/homedex", logo: "homedex" },
+    { name: "Velar", href: "https://github.com/AlexArtaud-Dev/Velar", logo: "velar" },
+    { name: "Orbix", href: "https://github.com/AlexArtaud-Dev/Orbix", logo: "orbix" },
   ] as OwnApp[],
   resilience: {
     fr: "Un point d'entrée redondant (Raspberry Pi) assure la haute disponibilité et la résilience des services hébergés.",
